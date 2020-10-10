@@ -186,12 +186,12 @@ def main():
                         if (vale_buy > 10):
                             print('Buy valbz')
                             n += 1
-                            write_to_exchange(exchange, {"type": "add", "symbol": 'VALEBZ', "dir": "BUY", "price": buy_price, "size": buy_qty, "order_id": n})
+                            write_to_exchange(exchange, {"type": "add", "symbol": 'VALBZ', "dir": "BUY", "price": buy_price, "size": buy_qty, "order_id": n})
                         (sell_price, sell_qty) = buy_bz
                         if (vale_buy < -10):
-                            print('Buy valbz')
+                            print('Sell valbz')
                             n += 1
-                            write_to_exchange(exchange, {"type": "add", "symbol": 'VALEBZ', "dir": "SELL", "price": sell_price, "size": sell_qty, "order_id": n})
+                            write_to_exchange(exchange, {"type": "add", "symbol": 'VALBZ', "dir": "SELL", "price": sell_price, "size": sell_qty, "order_id": n})
         # if(msg["type"] == "trade"):
         #     print(msg)
         # if(msg["type"] == "open"):
