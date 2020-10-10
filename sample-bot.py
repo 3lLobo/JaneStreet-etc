@@ -163,16 +163,16 @@ def main():
                         n += 1
                         write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "BUY", "price": sell_price, "size": sell_qty, "order_id": n})
             if(msg['symbol'] == 'VALBZ'):
-                if state['VALBZ']['sell'][0]:
-                    if state['VALBZ']['buy'][0]:
+                if state['VALBZ']['sell']:
+                    if state['VALBZ']['buy']:
                         bond_valbz = state['VALBZ']
                         sell_e = bond_valbz['sell'][0]
                         buy_bz = bond_valbz['buy'][0]
                         vale_flag = True
 
             if(msg['symbol'] == 'VALE' and vale_flag == True):
-                if state['VALE']['sell'][0]:
-                    if state['VALE']['buy'][0]:
+                if state['VALE']['sell']:
+                    if state['VALE']['buy']:
                         bond_vale = state['VALE']
                         buy_e = bond_vale['buy'][0]
                         sell_bz = bond['sell'][0]
