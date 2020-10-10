@@ -96,6 +96,7 @@ def main():
     # exponential explosion in pending msgs. Please, don't do that!
     # print("The exchange replied:", hello_from_exchange, file=sys.stderr)
     state = {}
+    n = 0
     while True:
         msg = read_from_exchange(exchange)
         if(msg["type"] == "hello"):
@@ -149,11 +150,13 @@ def main():
                 if len(buy):
                     (buy_price, buy_qty) = buy[0]
                     if (buy_price < bond_value):
-                        write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "SELL", "price": buy_price, "size": buy_qty}) # , "order_id": N
+                        n += 1
+                        write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "SELL", "price": buy_price, "size": buy_qty, "order_id": n})
                 if len(sell):
                     (sell_price, sell_qty) = sell[0]
                     if (sell_price > bond_value):
-                        write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "BUY", "price": sell_price, "size": sell_qty}) # , "order_id": N
+                        n += 1
+                        write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "BUY", "price": sell_price, "size": sell_qty, "order_id": n})
 
         if(msg["type"] == "trade"):
             print(msg)
