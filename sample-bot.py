@@ -161,12 +161,13 @@ def main():
                     if (sell_price < bond_value):
                         n += 1
                         write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "BUY", "price": sell_price, "size": sell_qty, "order_id": n})
+            if(msg['symbol'] == 'VALBZ'):
+                bond_valbz = state['VALBZ']
+                sell_e = bond_valbz['sell']
 
             if(msg['symbol'] == 'VALE'):
                 bond_vale = state['VALE']
-                bond_valbz = state['VALBZ']
                 buy_e = bond_vale['buy']
-                sell_e = bond_valbz['sell']
                 buy_bz = bond['buy']
                 sell_bz = bond['sell']
                 vale_sell = buy_e[0] - buy_bz[0]
