@@ -10,6 +10,7 @@ from __future__ import print_function
 import sys
 import socket
 import json
+import statistics
 
 # ~~~~~============== CONFIGURATION  ==============~~~~~
 # replace REPLACEME with your team name!
@@ -83,6 +84,8 @@ def main():
             state[msg['symbol']] = { 'sell': msg['sell'], 'buy': msg['buy'] }
             print('state:')
             print(state)
+
+            # popularity metrics:
             # how many people
             # how many things
             # closest price
@@ -91,6 +94,19 @@ def main():
             print(closest_prices)
             # mean price weighted over orders
             # mean price weighted over things
+
+            # metrics:
+            # gap size
+            # velocity of buy/sell
+            # expected_trading_prices
+            expected_trading_prices = { k: statistics.mean([dic['buy'], dic['sell']]) for k, dic in closest_prices.items() }
+            print('expected_trading_prices:')
+            print(expected_trading_prices)
+
+            # trade fast
+            # trade slow
+            # bonds
+
         if(msg["type"] == "trade"):
             print(msg)
         if(msg["type"] == "open"):
