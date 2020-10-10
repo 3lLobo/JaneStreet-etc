@@ -164,27 +164,30 @@ def main():
                         write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "BUY", "price": sell_price, "size": sell_qty, "order_id": n})
             if(msg['symbol'] == 'VALBZ'):
                 if state['VALBZ']['sell'][0]:
+                    if state['VALBZ']['buy'][0]:
                     bond_valbz = state['VALBZ']
                     sell_e = bond_valbz['sell'][0]
                     buy_bz = bond_valbz['buy'][0]
                     vale_flag = True
 
             if(msg['symbol'] == 'VALE' and vale_flag == True):
-                bond_vale = state['VALE']
-                buy_e = bond_vale['buy'][0]
-                sell_bz = bond['sell'][0]
-                vale_sell = buy_e[0] - buy_bz[0]
-                vale_buy = sell_e[0] - sell_bz[0]
-                print("Vale indicators buy/sell", vale_buy, vale_sell)
-                                
-                (buy_price, buy_qty) = sell_bz
-                if (vale_buy > 10):
-                    n += 1
-                    write_to_exchange(exchange, {"type": "add", "symbol": 'VALEBZ', "dir": "BUY", "price": buy_price, "size": buy_qty, "order_id": n})
-                (sell_price, sell_qty) = buy_bz
-                if (vale_buy < -10):
-                    n += 1
-                    write_to_exchange(exchange, {"type": "add", "symbol": 'VALEBZ', "dir": "SELL", "price": sell_price, "size": sell_qty, "order_id": n})
+                if state['VALE']['sell'][0]:
+                    if state['VALE']['buy'][0]:
+                        bond_vale = state['VALE']
+                        buy_e = bond_vale['buy'][0]
+                        sell_bz = bond['sell'][0]
+                        vale_sell = buy_e[0] - buy_bz[0]
+                        vale_buy = sell_e[0] - sell_bz[0]
+                        print("Vale indicators buy/sell", vale_buy, vale_sell)
+                                        
+                        (buy_price, buy_qty) = sell_bz
+                        if (vale_buy > 10):
+                            n += 1
+                            write_to_exchange(exchange, {"type": "add", "symbol": 'VALEBZ', "dir": "BUY", "price": buy_price, "size": buy_qty, "order_id": n})
+                        (sell_price, sell_qty) = buy_bz
+                        if (vale_buy < -10):
+                            n += 1
+                            write_to_exchange(exchange, {"type": "add", "symbol": 'VALEBZ', "dir": "SELL", "price": sell_price, "size": sell_qty, "order_id": n})
         if(msg["type"] == "trade"):
             print(msg)
         if(msg["type"] == "open"):
