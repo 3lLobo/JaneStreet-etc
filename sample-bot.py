@@ -134,7 +134,7 @@ def main():
 
             # bonds
             if(msg['symbol'] == 'BOND'):
-                bond = mean_prices['BOND']
+                bond = state['BOND']
                 buy = bond['buy']
                 sell = bond['sell']
                 bond_value = 1000
