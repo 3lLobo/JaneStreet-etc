@@ -103,6 +103,10 @@ def main():
             print('expected_trading_prices:')
             print(expected_trading_prices)
 
+            mean_prices = { k: { 'buy': mean_over_orders(dic['buy']), 'sell': mean_over_orders(dic['sell']) } for k, dic in state.items() }
+            print('closest_prices:')
+            print(mean_prices)
+
             # trade fast
             # trade slow
             # bonds
@@ -118,3 +122,12 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+def mean_over_orders(positions):
+    # List[Tuple2[int price, int quantity]
+    return statistics.mean([price for (price, qty) in positions])
+
+# TODO
+def mean_over_things(positions):
+    # List[Tuple2[int price, int quantity]
+    pass
