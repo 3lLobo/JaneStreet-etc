@@ -88,7 +88,7 @@ def main():
             break
         if(msg["type"] == "book"):
             state[msg['symbol']] = { 'sell': msg['sell'], 'buy': msg['buy'] }
-            print('state':)
+            print('state:')
             print(state)
             break
         if(msg["type"] == "trade"):
