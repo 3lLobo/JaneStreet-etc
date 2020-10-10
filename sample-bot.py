@@ -66,6 +66,14 @@ def mean_over_things(positions):
     # List[Tuple2[int price, int quantity]
     pass
 
+def closest_buy(positions):
+    # List[Tuple2[int price, int quantity]
+    return positions[0][0] if len(positions) else 0
+
+def closest_sell(positions):
+    # List[Tuple2[int price, int quantity]
+    return positions[0][0] if len(positions) else math.inf
+
 
 stocks = {'BOND': 100,'VALBZ': 10, 'VALE': 10,'GS': 100, 'MS': 100, 'WFC': 100, 'XLF': 100}
 
@@ -111,7 +119,7 @@ def main():
             # how many people
             # how many things
             # closest price
-            closest_prices = { k: { 'buy': dic['buy'][0][0] if len(dic['buy']) else 0, 'sell': dic['sell'][0][0] if len(dic['buy']) else math.inf } for k, dic in state.items() }
+            closest_prices = { k: { 'buy': closest_buy(dic['buy']), 'sell': closest_sell(dic['sell'][0][0]) } for k, dic in state.items() }
             print('closest_prices:')
             print(closest_prices)
             # mean price weighted over orders
@@ -138,12 +146,14 @@ def main():
                 buy = bond['buy']
                 sell = bond['sell']
                 bond_value = 1000
-                (buy_price, buy_qty) = buy
-                (sell_price, sell_qty) = sell
-                if (buy_price < bond_value):
-                    write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "SELL", "price": buy_price, "size": buy_qty}) # , "order_id": N
-                if (sell_price > bond_value):
-                    write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "BUY", "price": sell_price, "size": sell_qty}) # , "order_id": N
+                if len(buy):
+                    (buy_price, buy_qty) = buy[0]
+                    if (buy_price < bond_value):
+                        write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "SELL", "price": buy_price, "size": buy_qty}) # , "order_id": N
+                if len(sell):
+                    (sell_price, sell_qty) = sell[0]
+                    if (sell_price > bond_value):
+                        write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "BUY", "price": sell_price, "size": sell_qty}) # , "order_id": N
 
         if(msg["type"] == "trade"):
             print(msg)
