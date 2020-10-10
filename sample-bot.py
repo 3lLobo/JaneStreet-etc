@@ -84,6 +84,7 @@ stocks = {'BOND': 100,'VALBZ': 10, 'VALE': 10,'GS': 100, 'MS': 100, 'WFC': 100, 
 # ~~~~~============== MAIN LOOP ==============~~~~~
 
 def main():
+    vale_flag = False
     print(stocks['BOND'])
     exchange = connect()
     write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
@@ -164,11 +165,12 @@ def main():
             if(msg['symbol'] == 'VALBZ'):
                 bond_valbz = state['VALBZ']
                 sell_e = bond_valbz['sell']
+                buy_bz = bond_valbz['buy']
+                vale_flag = True
 
-            if(msg['symbol'] == 'VALE'):
+            if(msg['symbol'] == 'VALE' and vale_flag == True):
                 bond_vale = state['VALE']
                 buy_e = bond_vale['buy']
-                buy_bz = bond['buy']
                 sell_bz = bond['sell']
                 vale_sell = buy_e[0] - buy_bz[0]
                 vale_buy = sell_e[0] - sell_bz[0]
