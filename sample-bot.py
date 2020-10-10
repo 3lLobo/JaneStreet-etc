@@ -52,8 +52,9 @@ def main():
     write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
     hello_from_exchange = read_from_exchange(exchange)
     symbols = hello_from_exchange['symbols']
+    print('symbols: ' + symbols)
     positions = {symbol['code']: symbol['position'] for symbol in symbols}
-    print(positions)
+    print('positions: ' + positions)
     # A common mistake people make is to call write_to_exchange() > 1
     # time for every read_from_exchange() response.
     # Since many write messages generate marketdata, this will cause an
