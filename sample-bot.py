@@ -119,7 +119,7 @@ def main():
             # how many people
             # how many things
             # closest price
-            closest_prices = { k: { 'buy': closest_buy(dic['buy']), 'sell': closest_sell(dic['sell'][0][0]) } for k, dic in state.items() }
+            closest_prices = { k: { 'buy': closest_buy(dic['buy']), 'sell': closest_sell(dic['sell']) } for k, dic in state.items() }
             print('closest_prices:')
             print(closest_prices)
             # mean price weighted over orders
