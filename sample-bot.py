@@ -41,7 +41,7 @@ def write_to_exchange(exchange, obj):
 
 def read_from_exchange(exchange):
     msg = json.loads(exchange.readline())
-    print(msg)
+    # print(msg)
     return msg
 
 
@@ -65,41 +65,28 @@ def main():
     state = {}
     while True:
         msg = read_from_exchange(exchange)
-        if(msg["type"] == "close"):
-            print("The round has ended")
-            break
         if(msg["type"] == "hello"):
-            # ...
-            break
+            print(msg)
         if(msg["type"] == "ack"):
-            # ...
-            break
+            print(msg)
         if(msg["type"] == "reject"):
-            # ...
-            break
+            print(msg)
         if(msg["type"] == "error"):
-            # ...
-            break
+            print(msg)
         if(msg["type"] == "out"):
-            # ...
-            break
+            print(msg)
         if(msg["type"] == "fill"):
-            # ...
-            break
+            print(msg)
         if(msg["type"] == "book"):
             state[msg['symbol']] = { 'sell': msg['sell'], 'buy': msg['buy'] }
             print('state:')
             print(state)
-            break
         if(msg["type"] == "trade"):
-            # ...
-            break
+            print(msg)
         if(msg["type"] == "open"):
-            # ...
-            break
+            print(msg)
         if(msg["type"] == "close"):
-            # ...
-            break
+            print("The round has ended")
 
 if __name__ == "__main__":
     main()
