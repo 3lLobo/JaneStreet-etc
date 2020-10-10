@@ -56,6 +56,15 @@ def get_market_price(msg):
         prices[stock] = {'sell': sell_price, 'buy': buy_price, 'sell_vol': sell_vol, 'buy_vol': buy_vol}
     return prices
 
+def mean_over_orders(positions):
+    # List[Tuple2[int price, int quantity]
+    return statistics.mean([price for (price, qty) in positions])
+
+# TODO
+def mean_over_things(positions):
+    # List[Tuple2[int price, int quantity]
+    pass
+
 
 stocks = {'BOND': 100,'VALBZ': 10, 'VALE': 10,'GS': 100, 'MS': 100, 'WFC': 100, 'XLF': 100}
 
@@ -134,12 +143,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-def mean_over_orders(positions):
-    # List[Tuple2[int price, int quantity]
-    return statistics.mean([price for (price, qty) in positions])
-
-# TODO
-def mean_over_things(positions):
-    # List[Tuple2[int price, int quantity]
-    pass
