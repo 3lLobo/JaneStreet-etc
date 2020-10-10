@@ -57,9 +57,9 @@ def get_market_price(msg):
         prices[stock] = {'sell': sell_price, 'buy': buy_price, 'sell_vol': sell_vol, 'buy_vol': buy_vol}
     return prices
 
-def mean_over_orders(positions):
+def mean_over_orders(positions, default):
     # List[Tuple2[int price, int quantity]
-    return statistics.mean([price for (price, qty) in positions])
+    return statistics.mean([price for (price, qty) in positions]) if len(positions) else default
 
 # TODO
 def mean_over_things(positions):
@@ -134,7 +134,7 @@ def main():
             print('expected_trading_prices:')
             print(expected_trading_prices)
 
-            mean_prices = { k: { 'buy': mean_over_orders(dic['buy']), 'sell': mean_over_orders(dic['sell']) } for k, dic in state.items() }
+            mean_prices = { k: { 'buy': mean_over_orders(dic['buy'], 0), 'sell': mean_over_orders(dic['sell'], math.inf) } for k, dic in state.items() }
             print('mean_prices:')
             print(mean_prices)
 
