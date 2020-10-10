@@ -11,6 +11,7 @@ import sys
 import socket
 import json
 import statistics
+import numpy 
 
 # ~~~~~============== CONFIGURATION  ==============~~~~~
 # replace REPLACEME with your team name!
@@ -44,6 +45,17 @@ def read_from_exchange(exchange):
     msg = json.loads(exchange.readline())
     # print(msg)
     return msg
+
+def get_market_price(msg):
+    prices = {}
+    for stock in stocks.keys():
+        sell_price = mgs['stock']['sell'][0][0]
+        buy price = mgs['stock']['buy'][-1][0]
+        sell_vol = np.add(mgs['stock']['sell'][:][1])
+        buy_vol = np.add(mgs['stock']['buy'][:][1])
+        prices[stock] = {'sell': sell_price, 'buy': buy_price, 'sell_vol': sell_vol, 'buy_vol': buy_vol}
+    return prices
+
 
 stocks = {'BOND': 100,'VALBZ': 10, 'VALE': 10,'GS': 100, 'MS': 100, 'WFC': 100, 'XLF': 100}
 
