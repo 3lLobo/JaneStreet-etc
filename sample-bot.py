@@ -47,9 +47,10 @@ def read_from_exchange(exchange):
     try:
         msg = json.loads(line)
         # print(msg)
+        return msg
     except:
         print(line)
-    return msg
+    
 
 def get_market_price(msg):
     prices = {}
