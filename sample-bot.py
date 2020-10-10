@@ -173,8 +173,8 @@ def main():
                 bond_vale = state['VALE']
                 buy_e = bond_vale['buy'][0]
                 sell_bz = bond['sell'][0]
-                vale_sell = buy_e[0] - buy_bz[0]
-                vale_buy = sell_e[0] - sell_bz[0]
+                vale_sell = buy_e[0] - buy_bz
+                vale_buy = sell_e[0] - sell_bz
                 print("Vale indicators buy/sell", vale_buy, vale_sell)
                                 
                 (buy_price, buy_qty) = sell_bz[0]
