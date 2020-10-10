@@ -104,45 +104,45 @@ def main():
     state = {}
     n = 0
     while True:
-        msg = read_from_exchange(exchange)
-        if(msg["type"] == "hello"):
-            print(msg)
-        if(msg["type"] == "ack"):
-            print(msg)
-        if(msg["type"] == "reject"):
-            print(msg)
-        if(msg["type"] == "error"):
-            print(msg)
-        if(msg["type"] == "out"):
-            print(msg)
-        if(msg["type"] == "fill"):
-            print(msg)
-        if(msg["type"] == "book"):
-            state[msg['symbol']] = { 'sell': msg['sell'], 'buy': msg['buy'] }
-            print('state:')
-            print(state)
+        # msg = read_from_exchange(exchange)
+        # if(msg["type"] == "hello"):
+        #     print(msg)
+        # if(msg["type"] == "ack"):
+        #     print(msg)
+        # if(msg["type"] == "reject"):
+        #     print(msg)
+        # if(msg["type"] == "error"):
+        #     print(msg)
+        # if(msg["type"] == "out"):
+        #     print(msg)
+        # if(msg["type"] == "fill"):
+        #     print(msg)
+        # if(msg["type"] == "book"):
+        #     state[msg['symbol']] = { 'sell': msg['sell'], 'buy': msg['buy'] }
+        #     print('state:')
+        #     print(state)
 
-            # popularity metrics:
-            # how many people
-            # how many things
-            # closest price
-            closest_prices = { k: { 'buy': closest_buy(dic['buy']), 'sell': closest_sell(dic['sell']) } for k, dic in state.items() }
-            print('closest_prices:')
-            print(closest_prices)
-            # mean price weighted over orders
-            # mean price weighted over things
+            # # popularity metrics:
+            # # how many people
+            # # how many things
+            # # closest price
+            # closest_prices = { k: { 'buy': closest_buy(dic['buy']), 'sell': closest_sell(dic['sell']) } for k, dic in state.items() }
+            # print('closest_prices:')
+            # print(closest_prices)
+            # # mean price weighted over orders
+            # # mean price weighted over things
 
-            # metrics:
-            # gap size
-            # velocity of buy/sell
-            # expected_trading_prices
-            expected_trading_prices = { k: statistics.mean([dic['buy'], dic['sell']]) for k, dic in closest_prices.items() }
-            print('expected_trading_prices:')
-            print(expected_trading_prices)
+            # # metrics:
+            # # gap size
+            # # velocity of buy/sell
+            # # expected_trading_prices
+            # expected_trading_prices = { k: statistics.mean([dic['buy'], dic['sell']]) for k, dic in closest_prices.items() }
+            # print('expected_trading_prices:')
+            # print(expected_trading_prices)
 
-            mean_prices = { k: { 'buy': mean_over_orders(dic['buy'], 0), 'sell': mean_over_orders(dic['sell'], math.inf) } for k, dic in state.items() }
-            print('mean_prices:')
-            print(mean_prices)
+            # mean_prices = { k: { 'buy': mean_over_orders(dic['buy'], 0), 'sell': mean_over_orders(dic['sell'], math.inf) } for k, dic in state.items() }
+            # print('mean_prices:')
+            # print(mean_prices)
 
             # trade fast
             # trade slow
@@ -189,12 +189,12 @@ def main():
                         if (vale_buy < -10):
                             n += 1
                             write_to_exchange(exchange, {"type": "add", "symbol": 'VALEBZ', "dir": "SELL", "price": sell_price, "size": sell_qty, "order_id": n})
-        if(msg["type"] == "trade"):
-            print(msg)
-        if(msg["type"] == "open"):
-            print(msg)
-        if(msg["type"] == "close"):
-            print("The round has ended")
+        # if(msg["type"] == "trade"):
+        #     print(msg)
+        # if(msg["type"] == "open"):
+        #     print(msg)
+        # if(msg["type"] == "close"):
+        #     print("The round has ended")
 
 # def best_buy()
 
