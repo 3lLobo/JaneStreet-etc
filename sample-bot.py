@@ -43,8 +43,12 @@ def write_to_exchange(exchange, obj):
     exchange.write("\n")
 
 def read_from_exchange(exchange):
-    msg = json.loads(exchange.readline())
-    # print(msg)
+    line = exchange.readline()
+    try:
+        msg = json.loads(line)
+        # print(msg)
+    except:
+        print(line)
     return msg
 
 def get_market_price(msg):
