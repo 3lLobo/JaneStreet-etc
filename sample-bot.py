@@ -54,7 +54,7 @@ def main():
     symbols = hello_from_exchange['symbols']
     print('symbols:')
     print(symbols)
-    positions = {symbol['code']: symbol['position'] for symbol in symbols}
+    positions = {s['symbol']: s['position'] for s in symbols}
     print('positions:')
     print(positions)
     # A common mistake people make is to call write_to_exchange() > 1
