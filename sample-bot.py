@@ -131,7 +131,19 @@ def main():
 
             # trade fast
             # trade slow
+
             # bonds
+            if(msg['symbol'] == 'BOND'):
+                bond = mean_prices['BOND']
+                buy = bond['buy']
+                sell = bond['sell']
+                bond_value = 1000
+                (buy_price, buy_qty) = buy
+                (sell_price, sell_qty) = sell
+                if (buy_price < bond_value):
+                    write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "SELL", "price": buy_price, "size": buy_qty}) # , "order_id": N
+                if (sell_price > bond_value):
+                    write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "BUY", "price": sell_price, "size": sell_qty}) # , "order_id": N
 
         if(msg["type"] == "trade"):
             print(msg)
