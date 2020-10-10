@@ -83,12 +83,22 @@ def main():
             state[msg['symbol']] = { 'sell': msg['sell'], 'buy': msg['buy'] }
             print('state:')
             print(state)
+            # how many people
+            # how many things
+            # closest price
+            closest_prices = { k: { 'buy': dic['buy'][0][0], 'sell': dic['sell'][0][0] } for k, dic in state.items() }
+            print('closest_prices:')
+            print(closest_prices)
+            # mean price weighted over orders
+            # mean price weighted over things
         if(msg["type"] == "trade"):
             print(msg)
         if(msg["type"] == "open"):
             print(msg)
         if(msg["type"] == "close"):
             print("The round has ended")
+
+# def best_buy()
 
 if __name__ == "__main__":
     main()
