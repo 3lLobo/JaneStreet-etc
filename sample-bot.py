@@ -41,7 +41,7 @@ def write_to_exchange(exchange, obj):
 
 def read_from_exchange(exchange):
     msg = json.loads(exchange.readline())
-    print(msg)
+    # print(msg)
     return msg
 
 stocks = {'BOND': 100,'VALBZ': 10, 'VALE': 10,'GS': 100, 'MS': 100, 'WFC': 100, 'XLF': 100}
@@ -54,18 +54,41 @@ def main():
     write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
     hello_from_exchange = read_from_exchange(exchange)
     symbols = hello_from_exchange['symbols']
-    positions = {symbol['code']: symbol['position'] for symbol in symbols}
+    print('symbols:')
+    print(symbols)
+    positions = {s['symbol']: s['position'] for s in symbols}
+    print('positions:')
     print(positions)
     # A common mistake people make is to call write_to_exchange() > 1
     # time for every read_from_exchange() response.
-    # Since many write messages generate marketdata, this will cause an
-    # exponential explosion in pending messages. Please, don't do that!
+    # Since many write msgs generate marketdata, this will cause an
+    # exponential explosion in pending msgs. Please, don't do that!
     # print("The exchange replied:", hello_from_exchange, file=sys.stderr)
+    state = {}
     while True:
-        message = read_from_exchange(exchange)
-        if(message["type"] == "close"):
+        msg = read_from_exchange(exchange)
+        if(msg["type"] == "hello"):
+            print(msg)
+        if(msg["type"] == "ack"):
+            print(msg)
+        if(msg["type"] == "reject"):
+            print(msg)
+        if(msg["type"] == "error"):
+            print(msg)
+        if(msg["type"] == "out"):
+            print(msg)
+        if(msg["type"] == "fill"):
+            print(msg)
+        if(msg["type"] == "book"):
+            state[msg['symbol']] = { 'sell': msg['sell'], 'buy': msg['buy'] }
+            print('state:')
+            print(state)
+        if(msg["type"] == "trade"):
+            print(msg)
+        if(msg["type"] == "open"):
+            print(msg)
+        if(msg["type"] == "close"):
             print("The round has ended")
-            break
 
 if __name__ == "__main__":
     main()
