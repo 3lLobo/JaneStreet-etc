@@ -173,15 +173,15 @@ def main():
                 bond_vale = state['VALE']
                 buy_e = bond_vale['buy'][0]
                 sell_bz = bond['sell'][0]
-                vale_sell = buy_e[0] - buy_bz
-                vale_buy = sell_e[0] - sell_bz
+                vale_sell = buy_e[0] - buy_bz[0]
+                vale_buy = sell_e[0] - sell_bz[0]
                 print("Vale indicators buy/sell", vale_buy, vale_sell)
                                 
-                (buy_price, buy_qty) = sell_bz[0]
+                (buy_price, buy_qty) = sell_bz
                 if (vale_buy > 10):
                     n += 1
                     write_to_exchange(exchange, {"type": "add", "symbol": 'VALEBZ', "dir": "BUY", "price": buy_price, "size": buy_qty, "order_id": n})
-                (sell_price, sell_qty) = buy_bz[0]
+                (sell_price, sell_qty) = buy_bz
                 if (vale_buy < -10):
                     n += 1
                     write_to_exchange(exchange, {"type": "add", "symbol": 'VALEBZ', "dir": "SELL", "price": sell_price, "size": sell_qty, "order_id": n})
