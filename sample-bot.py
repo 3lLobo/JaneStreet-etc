@@ -10,6 +10,7 @@ from __future__ import print_function
 import sys
 import socket
 import json
+import math
 import statistics
 import numpy 
 
@@ -110,7 +111,7 @@ def main():
             # how many people
             # how many things
             # closest price
-            closest_prices = { k: { 'buy': dic['buy'][0][0], 'sell': dic['sell'][0][0] } for k, dic in state.items() }
+            closest_prices = { k: { 'buy': dic['buy'][0][0] if len(dic['buy']) else 0, 'sell': dic['sell'][0][0] if len(dic['buy']) else math.inf } for k, dic in state.items() }
             print('closest_prices:')
             print(closest_prices)
             # mean price weighted over orders
@@ -125,7 +126,7 @@ def main():
             print(expected_trading_prices)
 
             mean_prices = { k: { 'buy': mean_over_orders(dic['buy']), 'sell': mean_over_orders(dic['sell']) } for k, dic in state.items() }
-            print('closest_prices:')
+            print('mean_prices:')
             print(mean_prices)
 
             # trade fast
