@@ -44,10 +44,12 @@ def read_from_exchange(exchange):
     print(msg)
     return msg
 
+stocks = {'BOND': 100,'VALBZ': 10, 'VALE': 10,'GS': 100, 'MS': 100, 'WFC': 100, 'XLF': 100}
 
 # ~~~~~============== MAIN LOOP ==============~~~~~
 
 def main():
+    print(stocks['BOND'])
     exchange = connect()
     write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
     hello_from_exchange = read_from_exchange(exchange)
