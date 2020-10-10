@@ -40,7 +40,9 @@ def write_to_exchange(exchange, obj):
     exchange.write("\n")
 
 def read_from_exchange(exchange):
-    return json.loads(exchange.readline())
+    msg = json.loads(exchange.readline())
+    print(msg)
+    return msg
 
 
 # ~~~~~============== MAIN LOOP ==============~~~~~
@@ -53,10 +55,9 @@ def main():
     # time for every read_from_exchange() response.
     # Since many write messages generate marketdata, this will cause an
     # exponential explosion in pending messages. Please, don't do that!
-    print("The exchange replied:", hello_from_exchange, file=sys.stderr)
+    # print("The exchange replied:", hello_from_exchange, file=sys.stderr)
     while True:
         message = read_from_exchange(exchange)
-        print(message)
         if(message["type"] == "close"):
             print("The round has ended")
             break
