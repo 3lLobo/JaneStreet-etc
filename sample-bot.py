@@ -164,14 +164,14 @@ def main():
                         write_to_exchange(exchange, {"type": "add", "symbol": 'BOND', "dir": "BUY", "price": sell_price, "size": sell_qty, "order_id": n})
             if(msg['symbol'] == 'VALBZ'):
                 bond_valbz = state['VALBZ']
-                sell_e = bond_valbz['sell']
-                buy_bz = bond_valbz['buy']
+                sell_e = bond_valbz['sell'][0]
+                buy_bz = bond_valbz['buy'][0]
                 vale_flag = True
 
             if(msg['symbol'] == 'VALE' and vale_flag == True):
                 bond_vale = state['VALE']
-                buy_e = bond_vale['buy']
-                sell_bz = bond['sell']
+                buy_e = bond_vale['buy'][0]
+                sell_bz = bond['sell'][0]
                 vale_sell = buy_e[0] - buy_bz[0]
                 vale_buy = sell_e[0] - sell_bz[0]
                 print("Vale indicators buy/sell", vale_buy, vale_sell)
