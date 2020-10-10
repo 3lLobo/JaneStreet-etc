@@ -104,7 +104,7 @@ def main():
     state = {}
     n = 0
     while True:
-        # msg = read_from_exchange(exchange)
+        msg = read_from_exchange(exchange)
         # if(msg["type"] == "hello"):
         #     print(msg)
         # if(msg["type"] == "ack"):
@@ -117,8 +117,8 @@ def main():
         #     print(msg)
         # if(msg["type"] == "fill"):
         #     print(msg)
-        # if(msg["type"] == "book"):
-        #     state[msg['symbol']] = { 'sell': msg['sell'], 'buy': msg['buy'] }
+        if(msg["type"] == "book"):
+            state[msg['symbol']] = { 'sell': msg['sell'], 'buy': msg['buy'] }
         #     print('state:')
         #     print(state)
 
@@ -126,7 +126,7 @@ def main():
             # # how many people
             # # how many things
             # # closest price
-            # closest_prices = { k: { 'buy': closest_buy(dic['buy']), 'sell': closest_sell(dic['sell']) } for k, dic in state.items() }
+            closest_prices = { k: { 'buy': closest_buy(dic['buy']), 'sell': closest_sell(dic['sell']) } for k, dic in state.items() }
             # print('closest_prices:')
             # print(closest_prices)
             # # mean price weighted over orders
@@ -136,11 +136,11 @@ def main():
             # # gap size
             # # velocity of buy/sell
             # # expected_trading_prices
-            # expected_trading_prices = { k: statistics.mean([dic['buy'], dic['sell']]) for k, dic in closest_prices.items() }
+            expected_trading_prices = { k: statistics.mean([dic['buy'], dic['sell']]) for k, dic in closest_prices.items() }
             # print('expected_trading_prices:')
             # print(expected_trading_prices)
 
-            # mean_prices = { k: { 'buy': mean_over_orders(dic['buy'], 0), 'sell': mean_over_orders(dic['sell'], math.inf) } for k, dic in state.items() }
+            mean_prices = { k: { 'buy': mean_over_orders(dic['buy'], 0), 'sell': mean_over_orders(dic['sell'], math.inf) } for k, dic in state.items() }
             # print('mean_prices:')
             # print(mean_prices)
 
